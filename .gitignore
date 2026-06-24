@@ -22,3 +22,21 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/target/     # Si usas Maven
+/build/ 
+
+# Configuraciones personales (ocultas) de NetBeans
+/nbproject/private/
+nbactions.xml
+nb-configuration.xml
+
+
+# Basura del sistema
+.DS_Store
+Thumbs.db
+
