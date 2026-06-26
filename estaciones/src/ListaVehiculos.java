@@ -1,29 +1,30 @@
 public class ListaVehiculos {
-    private Vehiculo listaVehiculos[];
-    private int aVehiculo;
-    private int tamMaximo;
+    private Vehiculo[] lista;
+    private int        cantidad;
+    private int        tamMaximo;
 
     public ListaVehiculos(int tam) {
         this.tamMaximo = tam;
-        this.listaVehiculos = new Vehiculo[tamMaximo];
-        this.aVehiculo = 0;
+        this.lista     = new Vehiculo[tam];
+        this.cantidad  = 0;
     }
 
-    public void agregarVehiculo(Vehiculo nuevo) {
-        if (aVehiculo < tamMaximo) {
-            listaVehiculos[aVehiculo++] = nuevo;
+    // Agrega y devuelve el índice asignado
+    public int agregarVehiculo(Vehiculo nuevo) {
+        if (cantidad < tamMaximo) {
+            lista[cantidad] = nuevo;
+            return cantidad++;
         }
+        return -1;
     }
 
-    public Vehiculo consultarVehiculoXPlaca(String placaBuscar) {
-        for (int i = 0; i < aVehiculo; i++) {
-            if (listaVehiculos[i].getPlaca().equals(placaBuscar)) {
-                return listaVehiculos[i];
-            }
+    public Vehiculo consultarVehiculoXPlaca(String placa) {
+        for (int i = 0; i < cantidad; i++) {
+            if (lista[i].getPlaca().equals(placa)) return lista[i];
         }
         return null;
     }
 
-    public int getAVehiculo() { return aVehiculo; }
-    public Vehiculo getVehiculo(int pos) { return listaVehiculos[pos]; }
+    public Vehiculo getVehiculo(int pos) { return lista[pos]; }
+    public int      getCantidad()        { return cantidad; }
 }
