@@ -11,7 +11,7 @@ public class Main {
         ListaVehiculos catalogoVehiculos = new ListaVehiculos(200);
         
         // 2. Crear Usuarios y Vehículos de prueba
-        Usuario u1 = new Usuario("101110111", "Carlos Mendoza", "carlos@mail.com", "4000-1234-5678-9010");
+        Usuario u1 = new Usuario("1", "Carlos Mendoza", "carlos@mail.com", "4000-1234-5678-9010");
         catalogoUsuarios.agregarUsuario(u1);
         
         Vehiculo v1 = new Vehiculo("BCC-123", "Nissan Leaf", "CHAdeMO");
