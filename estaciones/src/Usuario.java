@@ -3,35 +3,38 @@ public class Usuario {
     private String nombreCompleto;
     private String correo;
     private String numeroTarjeta;
+    
+    // Estructuras integradas
+    private ListaSimpleC misVehiculosIds; // El garaje (lista enlazada)
+    private Pila historialFacturas;       // NUEVO: Historial LIFO de transacciones
 
-    // Garaje: guarda índices de catalogoVehiculos[]
-    private ListaSimpleC misVehiculosIds;
-
-    public Usuario(String cedula, String nombreCompleto,
-                   String correo, String numeroTarjeta) {
-        this.cedula          = cedula;
-        this.nombreCompleto  = nombreCompleto;
-        this.correo          = correo;
-        this.numeroTarjeta   = numeroTarjeta;
-        this.misVehiculosIds = new ListaSimpleC();
+    public Usuario(String cedula, String nombreCompleto, String correo, String numeroTarjeta) {
+        this.cedula = cedula;
+        this.nombreCompleto = nombreCompleto;
+        this.correo = correo;
+        this.numeroTarjeta = numeroTarjeta;
+        
+        // Inicializamos las estructuras
+        this.misVehiculosIds = new ListaSimpleC(); 
+        this.historialFacturas = new Pila(20); // Capacidad base del historial
     }
 
-    /** Agrega el índice del vehículo en catalogoVehiculos[] al garaje. */
-    public void registrarVehiculoEnGaraje(int idVehiculoEnListaGeneral) {
-        this.misVehiculosIds.agregarElemento(idVehiculoEnListaGeneral);
+    // Getters y Setters básicos
+    public String getCedula() { return cedula; }
+    public void setCedula(String cedula) { this.cedula = cedula; }
+    public String getNombreCompleto() { return nombreCompleto; }
+    public void setNombreCompleto(String nombreCompleto) { this.nombreCompleto = nombreCompleto; }
+    public String getCorreo() { return correo; }
+    public void setCorreo(String correo) { this.correo = correo; }
+    public String getNumeroTarjeta() { return numeroTarjeta; }
+    public void setNumeroTarjeta(String numeroTarjeta) { this.numeroTarjeta = numeroTarjeta; }
+    
+    // Getters de estructuras
+    public ListaSimpleC getMisVehiculosIds() { return misVehiculosIds; }
+    public Pila getHistorialFacturas() { return historialFacturas; }
+
+    // Método para apilar una nueva factura/penalidad
+    public void registrarFactura(TurnoFactura nuevaFactura) {
+        historialFacturas.ckIngresarElemento(nuevaFactura);
     }
-
-    public String       getCedula()           { return cedula; }
-    public void         setCedula(String s)   { this.cedula = s; }
-
-    public String       getNombreCompleto()         { return nombreCompleto; }
-    public void         setNombreCompleto(String s) { this.nombreCompleto = s; }
-
-    public String       getCorreo()           { return correo; }
-    public void         setCorreo(String s)   { this.correo = s; }
-
-    public String       getNumeroTarjeta()          { return numeroTarjeta; }
-    public void         setNumeroTarjeta(String s)  { this.numeroTarjeta = s; }
-
-    public ListaSimpleC getMisVehiculosIds()   { return misVehiculosIds; }
 }

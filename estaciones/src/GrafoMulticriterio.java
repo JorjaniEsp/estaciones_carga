@@ -91,10 +91,21 @@ public class GrafoMulticriterio {
         for (int i = 0; i < cantidadNodos; i++) {
             if (i == origen)                        continue;
             if (dist[i] == Double.MAX_VALUE)        continue;
+            
+            // Asumiendo que agregas getEstado() a Estacion (1 = activo, 0 = inactivo)
             if (nodos[i].getEstado() == 0)          continue;
 
-            String c = nodos[i].getConectorSoportado();
-            boolean compatible = c.equals(conectorRequerido) || c.equals("UNIVERSAL");
+            // NUEVA LÓGICA DE COMPATIBILIDAD (Iterar sobre el arreglo)
+            boolean compatible = false;
+            String[] conectores = nodos[i].getConectoresSoportados();
+            if (conectores != null) {
+                for (int k = 0; k < conectores.length; k++) {
+                    if (conectores[k].equals(conectorRequerido) || conectores[k].equals("UNIVERSAL")) {
+                        compatible = true;
+                        break;
+                    }
+                }
+            }
 
             if (compatible && dist[i] < minCosto) {
                 minCosto = dist[i];
@@ -135,7 +146,7 @@ public class GrafoMulticriterio {
 
         String r = "";
         for (int i = n - 1; i >= 0; i--) {
-            r += nodos[camino[i]].getNombreUbicacion();
+            r += nodos[camino[i]].getUbicacion(); // CAMBIO AQUÍ
             if (i > 0) r += " -> ";
         }
         return r;
@@ -144,16 +155,16 @@ public class GrafoMulticriterio {
     private void imprimirResultado(int ganador, double[] dist, int[] previo,
                                     int origen, String criterio, String conector) {
         System.out.println("\n[Dijkstra | " + criterio + " | Conector: " + conector + "]");
-        System.out.println("Origen: " + nodos[origen].getNombreUbicacion());
+        System.out.println("Origen: " + nodos[origen].getUbicacion()); // CAMBIO AQUÍ
         if (ganador == -1) {
             System.out.println(">> Sin resultado: no hay estaciones compatibles.");
             return;
         }
         String unidad = criterio.equals("KM") ? " km"
                       : criterio.equals("TIEMPO") ? " h" : " colones";
-        System.out.println(">> Estacion optima : " + nodos[ganador].getNombreUbicacion());
+        System.out.println(">> Estacion optima : " + nodos[ganador].getUbicacion()); // CAMBIO AQUÍ
         System.out.println(">> Costo           : " + dist[ganador] + unidad);
-        System.out.println(">> Tarifa          : " + nodos[ganador].getTarifaPorKwh() + "/kWh");
+        System.out.println(">> Tarifa          : " + nodos[ganador].getTarifaPorKwh() + "/kWh"); // Asegúrate de tener getTarifaPorKwh() en Estacion
         System.out.println(">> Ruta            : " + reconstruirCamino(previo, ganador));
     }
 

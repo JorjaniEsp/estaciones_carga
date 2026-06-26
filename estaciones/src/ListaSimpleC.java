@@ -17,14 +17,14 @@ public class ListaSimpleC {
    private int Apunt[ ]; 
    private int INFO [ ]; 
    private int PTR;
-   private Pila DISP;
+   private PilaV DISP;
    
    public ListaSimpleC(){
      TOP   = 20;
      INFO  = new int[TOP];
      Apunt = new int[TOP];
      PTR   = 0;
-     DISP  = new Pila(TOP-1);
+     DISP  = new PilaV(TOP-1);
      inicializarPila();
    }
    
@@ -33,7 +33,7 @@ public class ListaSimpleC {
      INFO = new int[TOP];
      Apunt = new int[TOP];
      PTR = 0;
-     DISP = new Pila(TOP-1);
+     DISP = new PilaV(TOP-1);
      inicializarPila();
    }
    
@@ -129,4 +129,9 @@ public class ListaSimpleC {
      salida+=DISP.toString();
      return salida;
    }
+   
+   // Getters para que la interfaz gráfica pueda leer la lista circular
+    public int getPTR() { return PTR; }
+    public int[] getINFO() { return INFO; }
+    public int[] getApunt() { return Apunt; }
 }

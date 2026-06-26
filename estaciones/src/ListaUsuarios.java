@@ -8,6 +8,10 @@ public class ListaUsuarios {
         this.lista     = new Usuario[tam];
         this.cantidad  = 0;
     }
+    
+    public int getCantidadUsuarios(){
+        return lista.length;
+    }
 
     // Agrega un usuario al final
     public void agregarUsuario(Usuario nuevo) {
