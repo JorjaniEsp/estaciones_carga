@@ -40,3 +40,5 @@ nb-configuration.xml
 .DS_Store
 Thumbs.db
 
+/estaciones/nbproject/private/
+/estaciones/build/
